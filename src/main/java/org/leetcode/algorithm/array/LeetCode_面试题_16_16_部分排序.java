@@ -30,7 +30,7 @@ public class LeetCode_面试题_16_16_部分排序 {
         if (array == null || array.length <= 1) return new int[]{-1, -1};
 
         int length = array.length;
-        //从左往右找逆序对，记录最大的值max，比最大的max小的话，rightIndex++
+        //从左往右找逆序对，记录最大的值max，比最大的max小的话，rightIndex=index
         int max = array[0];
         int rightIndex = -1;
         for (int i = 1; i < length; i++) {
@@ -44,7 +44,7 @@ public class LeetCode_面试题_16_16_部分排序 {
         if (rightIndex == -1) return new int[]{-1, -1};
         int min = array[length - 1];
         int leftIndex = -1;
-        //从右往左找逆序对，记录最小的值min，比最小的min小的话，rightIndex--
+        //从右往左找逆序对，记录最小的值min，比最小的min小的话，rightIndex=index
         for (int i = length - 2; i >=0 ; i--) {
             int value = array[i];
             if (value <= min) {
