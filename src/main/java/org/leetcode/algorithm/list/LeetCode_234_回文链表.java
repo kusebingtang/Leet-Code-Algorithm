@@ -31,8 +31,31 @@ public class LeetCode_234_回文链表 {
         if (head.next.next == null) return head.val == head.next.val;  //两个节点，要求两个节点的值必须相同
 
 
-
-
         return false;
+    }
+
+
+    private ListNode moddleNode(ListNode head) {
+        ListNode fast = head;
+        ListNode slow = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = head.next;
+            fast = head.next.next;
+        }
+        return slow;
+    }
+
+
+    //反转链表
+    private ListNode reverseList(ListNode head) {
+        ListNode newHead = null;
+        while (head != null) {
+            ListNode temp = head.next;
+            head.next = newHead;
+            newHead = head;
+            head = temp;
+        }
+        return newHead;
     }
 }
