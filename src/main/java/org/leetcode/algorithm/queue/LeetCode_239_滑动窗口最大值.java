@@ -107,4 +107,81 @@ public class LeetCode_239_滑动窗口最大值 {
         }
         return output;
     }
+
+    /**
+     * 方法三
+     * <p>
+     * For Example: A = [2,1,3,4,6,3,8,9,10,12,56], w=4
+     * <p>
+     * partition the array in blocks of size w=4. The last block may have less then w.
+     * 2, 1, 3, 4 | 6, 3, 8, 9 | 10, 12, 56|
+     * <p>
+     * Traverse the list from start to end and calculate max_so_far. Reset max after each block boundary (of w elements).
+     * left_max[] = 2, 2, 3, 4 | 6, 6, 8, 9 | 10, 12, 56
+     * <p>
+     * Similarly calculate max in future by traversing from end to start.
+     * right_max[] = 4, 4, 4, 4 | 9, 9, 9, 9 | 56, 56, 56
+     * <p>
+     * now, sliding max at each position i in current window, sliding-max(i) = max{right_max(i), left_max(i+w-1)}
+     * sliding_max = 4, 6, 6, 8, 9, 10, 12, 56
+     */
+    public static int[] slidingWindowMax(final int[] nums, final int k) {
+        final int[] max_left = new int[nums.length];
+        final int[] max_right = new int[nums.length];
+
+        max_left[0] = nums[0];
+        max_right[nums.length - 1] = nums[nums.length - 1];
+
+        for (int i = 1; i < nums.length; i++) {
+            max_left[i] = (i % k == 0) ? nums[i] : Math.max(max_left[i - 1], nums[i]);
+
+            final int j = nums.length - i - 1;
+            max_right[j] = (j % k == 0) ? nums[j] : Math.max(max_right[j + 1], nums[j]);
+        }
+
+        final int[] sliding_max = new int[nums.length - k + 1];
+        for (int i = 0, j = 0; i + k <= nums.length; i++) {
+            sliding_max[j++] = Math.max(max_right[i], max_left[i + k - 1]);
+        }
+        return sliding_max;
+    }
+
+
+    /**
+     * 方法4
+     */
+    public int[] maxSlidingWindow4(int[] nums, int k) {
+        int n = nums.length;
+        if (n * k == 0) return new int[0];
+        if (k == 1) return nums;
+
+        int[] output = new int[n - k + 1];
+
+        int maxIndex = 0;
+
+        for (int i = 1; i < k; i++) {
+            if (nums[i] >= nums[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+
+        for (int lIndex = 0; lIndex < output.length; lIndex++) {
+            int rIndex = lIndex + k - 1;//滑动窗口最右侧Index索引
+            if (maxIndex < lIndex) { //最大值的索引不在滑动窗口内
+                maxIndex = lIndex;
+
+                for (int i = lIndex + 1; i <= rIndex; i++) {
+                    if (nums[i] >= nums[maxIndex]) {
+                        maxIndex = i;
+                    }
+                }
+
+            } else if (nums[rIndex] >= nums[maxIndex]) {
+                maxIndex = rIndex;
+            }
+            output[lIndex] = nums[maxIndex];
+        }
+        return output;
+    }
+
 }
