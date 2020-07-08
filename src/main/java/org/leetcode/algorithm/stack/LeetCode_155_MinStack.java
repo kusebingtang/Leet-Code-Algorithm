@@ -1,6 +1,8 @@
 package org.leetcode.algorithm.stack;
 
 
+import java.util.Stack;
+
 /***
  * Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.
  * push(x) -- Push element x onto stack.
@@ -28,30 +30,58 @@ class MinStack {
     /**
      * initialize your data structure here.
      */
-    public MinStack() {
 
+    private Stack<Integer> stackData;
+    private Stack<Integer> stackMin;
+
+    public MinStack() {
+        this.stackData = new Stack<Integer>();
+        this.stackMin = new Stack<Integer>();
     }
 
     public void push(int x) {
+        stackData.push(x);
+        if (!stackMin.isEmpty()) {
+            int value = stackMin.peek();
+            stackMin.push(value > x ? x : value);
+        } else {
+            stackMin.push(x);
+        }
 
     }
 
     public void pop() {
-
+        if (this.stackData.isEmpty()) {
+            throw new RuntimeException("Your stack is empty.");
+        }
+        stackData.pop();
+        stackMin.pop();
     }
 
     public int top() {
-
-
-        return 0;
+        if (this.stackData.isEmpty()) {
+            throw new RuntimeException("Your stack is empty.");
+        }
+        stackMin.peek();
+        return stackData.peek();
     }
 
     public int getMin() {
-
-        return 0;
+        if (this.stackMin.isEmpty()) {
+            throw new RuntimeException("Your stack is empty.");
+        }
+        return stackMin.peek();
     }
 }
 
 public class LeetCode_155_MinStack {
+
+    public static void main(String[] args) {
+        MinStack stack = new MinStack();
+        stack.push(-2);
+        stack.push(0);
+        stack.push(-3);
+        stack.getMin();
+    }
 
 }
