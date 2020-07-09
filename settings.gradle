@@ -1,3 +1,4 @@
 rootProject.name = 'Leet-Code-Algorithm'
 include 'basic_class'
+include 'algorithmbasic2020'
 
