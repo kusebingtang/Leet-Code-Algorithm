@@ -20,7 +20,7 @@ public class Code01_MergeSort {
         int mid = L + ((R - L) >> 1);
         process(arr, L, mid);
         process(arr, mid + 1, R);
-        merge(arr, L, mid, R);
+        merge(arr, L, mid, R);  // O(N)
     }
 
     public static void merge(int[] arr, int L, int M, int R) {
