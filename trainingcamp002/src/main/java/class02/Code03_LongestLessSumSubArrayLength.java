@@ -11,7 +11,7 @@ public class Code03_LongestLessSumSubArrayLength {
 		minSums[arr.length - 1] = arr[arr.length - 1];
 		minSumEnds[arr.length - 1] = arr.length - 1;
 		for (int i = arr.length - 2; i >= 0; i--) {
-			if (minSums[i + 1] < 0) {
+			if (minSums[i + 1] <= 0) {
 				minSums[i] = arr[i] + minSums[i + 1];
 				minSumEnds[i] = minSumEnds[i + 1];
 			} else {
