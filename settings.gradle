@@ -3,4 +3,5 @@ include 'basic_class'
 include 'algorithmbasic2020'
 include 'trainingcamp001'
 include 'trainingcamp002'
+include 'mjAlgorithm'
 
