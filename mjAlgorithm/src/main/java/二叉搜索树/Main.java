@@ -3,8 +3,6 @@ package 二叉搜索树;
 import 二叉搜索树.printer.BinaryTreeInfo;
 import 二叉搜索树.printer.BinaryTrees;
 
-import java.nio.file.Files;
-import java.util.Comparator;
 
 
 
@@ -210,6 +208,6 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		test5();
+		test9();
 	}
 }
